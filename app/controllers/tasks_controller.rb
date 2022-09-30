@@ -4,8 +4,9 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
+  # здесь используется @task за место @tasks, так как
   def new
-    @tasks = Task.new
+    @task = Task.new
   end
 
   def create
