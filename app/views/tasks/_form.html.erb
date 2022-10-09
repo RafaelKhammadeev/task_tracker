@@ -1,4 +1,8 @@
-<%= form_with(model: task) do |form| %>
+<!--в form-with закинули project и task, так как в они оба используется-->
+<!--для нахождения пути и контроллере-->
+<!--в чем отличие между project и @project-->
+<!--данная форма влияет на данные получаемые в ссылке-->
+<%= form_with(model: [project, task]) do |form| %>
 
   <div class="field">
     <%= form.label :title %>
@@ -10,10 +14,12 @@
     <%= form.text_area :description %>
   </div>
 
+
   <div class="field">
     <%= form.label :deadline_at %>
     <%= form.datetime_select :deadline_at %>
   </div>
+
 
   <div class="field">
     <%= form.label :project_id %>

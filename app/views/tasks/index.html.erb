@@ -20,9 +20,10 @@
       <td><%= task.created_at %></td>
       <td><%= task.deadline_at %></td>
       <td><%= task.project.name %></td>
-      <td><%= link_to 'Show', task %></td>
-      <td><%= link_to 'Edit', edit_task_path(task) %></td>
-      <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Show', url_for([@project, task]) %></td>
+<!--      task.projects вытаскивает id из-за связи моделей -->
+      <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
+      <td><%= link_to 'Destroy', url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>
@@ -30,4 +31,6 @@
 
 <br>
 
-<%= link_to 'New task', new_task_path %>
+<!--в new_project_task_path - не нужно не task, project_id, а task_id создается новый-->
+<%= link_to 'New task', new_project_task_path %>
+
