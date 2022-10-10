@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   # set_task - приватная функция в данном классе
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy new]
 
   def index
     # Task.all появляются с модели (при наследовании от ApplicationRecord)
@@ -14,7 +15,7 @@ class TasksController < ApplicationController
   # здесь используется @task за место @tasks, так как
   def new
     @task = Task.new
-    @project = Project.new
+    # @project тоже должно создаваться так оно используется в формах
   end
 
   def edit
@@ -56,10 +57,13 @@ class TasksController < ApplicationController
     # p params[:project_id]
     # find_by ищет первое совпадение
     # find_by bang version is find_by!
-    # Task.find_by!(id: params[:id]) равнозначно Task.find(id: params[:id])
+    # Task.find_by!(id: params[:id]) равнозначно
+    # Task.find(id: params[:id])
     @task = Task.find_by!(id: params[:id])
+  end
+
+  def set_project
     @project = Project.find(params[:project_id])
-    # @project = @task.project
   end
 
   def task_params
