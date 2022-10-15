@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash.now[:task_notice] = "You're stuck here!"
-      redirect_to project_task_path(@project, @task), notice: "task was successfully updated."
+      redirect_to project_task_path(@project, @task), flash: { task_update_notice: true }
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_path(@project), notice: "Task was successfully destroyed."
+    redirect_to project_path(@project), notice: "task was successfully destroyed."
   end
 
   private
