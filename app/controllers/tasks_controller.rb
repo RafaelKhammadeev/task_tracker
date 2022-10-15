@@ -38,9 +38,9 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to project_tasks_path, notice: "Task was successfully created."
+      flash.now[:task_notice] = "You're stuck here!"
+      redirect_to project_task_path(@project, @task), notice: "task was successfully updated."
     else
-      flash.now[:task_notice] = "Something went wrong. Try again."
       render :edit
     end
   end

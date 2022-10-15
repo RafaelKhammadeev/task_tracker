@@ -1,11 +1,6 @@
 <h1>Editing Task</h1>
 
-<%# if flash[:task_notice] %>
-<!--  <p>Welcome!</p>-->
-<%# end %>
-
-
-<%= render 'form', task: @task, project: @project%>
+<%= render 'form', task: @task, project: @project %>
 
 <%= link_to 'Show', project_task_path(@project, @task) %> |
 <%= link_to 'Back', project_tasks_path %>
