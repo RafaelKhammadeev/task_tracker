@@ -4,7 +4,13 @@ class TasksController < ApplicationController
   before_action :set_project, only: %i[show edit update create destroy new index]
 
   def index
-    @tasks = Task.all
+    tasks = []
+
+    Task.all.each do |task|
+      tasks << task if task[:project_id].to_s == params[:project_id].to_s
+    end
+
+    @tasks = tasks
   end
 
   def show
@@ -41,7 +47,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to projects_path, notice: "Task was successfully destroyed."
+    redirect_to project_path(@project), notice: "Task was successfully destroyed."
   end
 
   private
