@@ -4,30 +4,32 @@
 
 <table>
   <thead>
-    <tr>
-      <th><%= link_to "Name", :sort => "name"%></th>
-      <th>Description</th>
-      <th><%= link_to "Created at", :sort => "created_at desc"%></th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th><%= link_to "Name",
+                    :sort => params[:sort] != "name asc" ? "name asc" : "name desc" %></th>
+    <th>Description</th>
+    <th><%= link_to "Created at",
+                    :sort => params[:sort] != "created_at asc" ? "created_at asc" : "created_at desc" %></th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= time_ago_in_words(project.created_at) %> ago</td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Tasks', project_tasks_path(project) %></td>
-      </tr>
-    <% end %>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><%= project.description %></td>
+      <td><%= time_ago_in_words(project.created_at) %> ago</td>
+      <td><%= link_to 'Show', project %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Tasks', project_tasks_path(project) %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
-<%= paginate @projects %>
+<%= paginate @projects, window: 2 %>
 
 <br>
 
