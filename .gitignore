@@ -26,8 +26,4 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-<<<<<<< HEAD
 .idea
-=======
-.idea
->>>>>>> c69a611 (add ingore .idea in .gitignore)
