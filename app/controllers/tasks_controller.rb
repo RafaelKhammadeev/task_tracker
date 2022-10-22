@@ -4,13 +4,7 @@ class TasksController < ApplicationController
   before_action :set_project, only: %i[show edit update create destroy new index]
 
   def index
-    tasks = []
-
-    Task.all.each do |task|
-      tasks << task if task[:project_id].to_s == params[:project_id].to_s
-    end
-
-    @tasks = tasks
+    @tasks = @project.tasks
   end
 
   def show
@@ -30,7 +24,7 @@ class TasksController < ApplicationController
 
     if @task.save
       # project_task_path(task)
-      redirect_to project_task_path(@project, @task)
+      redirect_to project_task_path(@project, @task), notice: "Successfully create"
     else
       render :new
     end
@@ -38,9 +32,9 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash.now[:task_notice] = "You're stuck here!"
-      redirect_to project_task_path(@project, @task), flash: { task_update_notice: true }
+      redirect_to project_task_path(@project, @task), notice: "Successfully update"
     else
+      flash.now[:notice] = "Something went wrong. Try again."
       render :edit
     end
   end

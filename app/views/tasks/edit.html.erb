@@ -1,5 +1,7 @@
 <h1>Editing Task</h1>
 
+<p id="notice"><%= notice %></p>
+
 <%= render 'form', task: @task, project: @project %>
 
 <%= link_to 'Show', project_task_path(@project, @task) %> |
