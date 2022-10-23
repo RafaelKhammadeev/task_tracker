@@ -12,13 +12,18 @@ class SessionsController < ApplicationController
             &.authenticate(user_params[:password])
 
     if @user
-      session[:current_user_id] = @user.id
+      log_in @user
       redirect_to root_path, notice: "You've successfully logged in!"
     else
       @user = User.new
       @user.errors.add :base, "Wrong email or password"
       render :new
     end
+  end
+
+  def destroy
+    log_out
+    redirect_to root_path
   end
 
   private
