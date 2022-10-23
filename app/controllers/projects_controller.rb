@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
                        .order(params[:sort])
                        .page(params[:page])
                        .per(5)
+    authorize! @projects
   end
 
   # GET /projects/1
@@ -15,6 +16,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
+    authorize! Project
     @project = Project.new
   end
 
@@ -24,11 +26,14 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
+    authorize! Project
     @project = Project.new(project_params)
+    @project_membership = ProjectMembership.new(project_membership_params)
 
-    if @project.save
+    if @project.save && @project_membership.save
       redirect_to @project, notice: "Project was successfully created."
     else
+      flash.now[:alert] = "Something went wrong. Try again."
       render :new
     end
   end
@@ -58,5 +63,13 @@ class ProjectsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def project_params
     params.require(:project).permit(:name, :description)
+  end
+
+  def project_membership_params
+    {
+      project: @project,
+      user: current_user,
+      role: :owner
+    }
   end
 end
