@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
+  before_action -> { authorize! Project }, only: %i[index show new create]
 
   # GET /projects
   def index
@@ -7,7 +8,6 @@ class ProjectsController < ApplicationController
                        .order(params[:sort])
                        .page(params[:page])
                        .per(5)
-    authorize! @projects
   end
 
   # GET /projects/1
@@ -16,7 +16,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    authorize! Project
     @project = Project.new
   end
 
@@ -26,13 +25,13 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    authorize! Project
     @project = Project.new(project_params)
     @project_membership = ProjectMembership.new(project_membership_params)
 
     if @project.save && @project_membership.save
       redirect_to @project, notice: "Project was successfully created."
     else
+      @project.destroy
       flash.now[:alert] = "Something went wrong. Try again."
       render :new
     end

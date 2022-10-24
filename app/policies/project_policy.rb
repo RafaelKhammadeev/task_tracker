@@ -5,11 +5,15 @@ class ProjectPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def new?
-    user.present?
+    create?
   end
 
   def create?
-    new?
+    user.present?
   end
 end
