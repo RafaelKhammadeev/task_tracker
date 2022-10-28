@@ -21,6 +21,6 @@ module SessionsHelper
   end
 
   def check_for_null_str(text)
-    text != '' ? text : nil
+    text == "" ? nil : text
   end
 end
