@@ -1,4 +1,5 @@
 module SessionsHelper
+<<<<<<< HEAD
   # Осуществляет вход данного пользователя.
   def log_in(user)
     session[:user_id] = user.id
@@ -17,4 +18,6 @@ module SessionsHelper
   def check_for_null_str(text)
     text == "" ? nil : text
   end
+=======
+>>>>>>> parent of bf3db90 (add header with (sign up, log in, log out), add destroy in sessions)
 end

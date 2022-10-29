@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
             &.authenticate(user_params[:password])
 
     if @user
-      log_in @user
+      session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully logged in!"
     else
       @user = User.new
@@ -21,12 +21,15 @@ class SessionsController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def destroy
     session.delete(:user_id)
     @current_user = nil
     redirect_to root_path
   end
 
+=======
+>>>>>>> parent of bf3db90 (add header with (sign up, log in, log out), add destroy in sessions)
   private
 
   def user_params
