@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
-  before_action -> { authorize! Project }, only: %i[index show new create edit]
-  before_action -> { authorize! @project }, only: %i[destroy update]
+  before_action -> { authorize! Project }, only: %i[index show new create]
+  before_action -> { authorize! @project }, only: %i[destroy update  edit]
 
   # GET /projects
   def index
