@@ -5,6 +5,7 @@ class UserPolicy < ApplicationPolicy
     create?
   end
 
+  # может зарегестрировать, если раньше не был
   def create?
     user.blank?
   end

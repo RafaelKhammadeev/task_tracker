@@ -14,6 +14,14 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    true
+  end
+
+  def update?
+    record.project_memberships.find_by(user_id: user).role == "member"
+  end
+
+  def destroy?
+    record.project_memberships.find_by(user_id: user).role == "owner"
   end
 end

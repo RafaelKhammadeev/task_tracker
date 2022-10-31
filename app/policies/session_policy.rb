@@ -13,4 +13,9 @@ class SessionPolicy < ApplicationPolicy
   def create?
     user.blank?
   end
+
+  # разлогиниться, если залогинен
+  def destroy?
+    user.present?
+  end
 end
