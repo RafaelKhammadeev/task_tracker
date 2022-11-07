@@ -1,0 +1,21 @@
+<%= form_with(model: comment, url: [project, task, comment]) do |form| %>
+  <div class="field">
+    <strong><%= form.label :content, "Content of Comment" %></strong>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :task_id %>
+    <%= form.select :task_id, Task.all.pluck(:title, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.select :user_id, User.all.pluck(:email, :id) %>
+  </div>
+
+  <div class="field">
+    <%= form.submit "Сохранить", class: 'button button-main' %>
+  </div>
+
+<% end %>
