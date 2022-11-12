@@ -5,6 +5,10 @@ class SessionPolicy < ApplicationPolicy
     user.present?
   end
 
+  def destroy?
+    show?
+  end
+
   def new?
     create?
   end
