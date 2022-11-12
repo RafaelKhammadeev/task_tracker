@@ -39,7 +39,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to project_task_url(@task.project, @task), notice: "Task was successfully updated."
     else
-      flash.now[:notice] = "Something went wrong. Try again."
+      flash.now[:alert] = "Something went wrong. Try again."
       render :edit
     end
   end
