@@ -29,7 +29,7 @@
 </p>
 
 <!--форма создания комментария-->
-<%= render 'form_comment', project: @project, task: @task, comment: @comment %>
+<%= render 'comments/form', project: @project, task: @task, comment: @comment %>
 
 <table>
   <thead>
@@ -44,9 +44,8 @@
     <tr>
       <td><%= comment.content %></td>
       <td><%= User.find(comment.user_id)['email'] %></td>
-<!--      <td><%#= link_to 'Show', url_for([@project, task]) %></td>-->
-<!--      <td><%#= link_to 'Edit', edit_project_task_path(@project, task) %></td>-->
-<!--      <td><%#= link_to 'Destroy', url_for([@project, task]), method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <td><%= link_to 'Edit', edit_project_task_comment_path(@project, @task, comment)%></td>
+      <td><%= link_to 'Destroy', project_task_comment_path(@project, @task, comment) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>

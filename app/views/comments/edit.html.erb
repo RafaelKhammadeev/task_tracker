@@ -1,0 +1,5 @@
+<h1>Editing Project</h1>
+
+<%= render 'form', project: @project, task: @task, comment: @comment %>
+
+<%= link_to 'Back', project_task_path(@project, @task) %>

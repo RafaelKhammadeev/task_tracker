@@ -36,6 +36,7 @@ class TasksController < ApplicationController
   end
 
   def update
+
     if @task.update(task_params)
       redirect_to project_task_url(@task.project, @task), notice: "Task was successfully updated."
     else
@@ -54,15 +55,15 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
-  def set_comment
-    @comment = Comment.find(params[:task_id])
-  end
+  # def set_comment
+  #   @comment = Comment.find(params[:task_id])
+  # end
 
   def task_params
     params.require(:task).permit(:title, :description, :deadline_at, :status, :project_id)
   end
 
-  def comment_params
-    params.require(:comment).permit(:content, :task_id)
-  end
+  # def comment_params
+  #   params.require(:comment).permit(:content, :task_id)
+  # end
 end

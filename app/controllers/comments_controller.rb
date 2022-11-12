@@ -1,8 +1,13 @@
 class CommentsController < ApplicationController
+  before_action :set_task
+  before_action :set_project
+  before_action :set_comment, only: %i[edit update destroy]
+  before_action -> { authorize! @comment, with: CommentPolicy }
   # коменты должны отображаться в task_show
 
-  # здесь должны отображаться создаваться комменты
-  # а я их пытался создать в контроллере task
+  def edit
+  end
+
   def create
     @comment = Comment.new(comment_params)
 
@@ -10,28 +15,29 @@ class CommentsController < ApplicationController
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully created."
     else
       @comment.destroy
-      flash.now[:alert] = "Something went wrong. Try again."
-      render :new
+      flash.now[:alert] = "Comment must not be empty."
+      render :"tasks/show"
     end
   end
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: "Comment was successfully updated."
+      redirect_to project_task_path(@project, @task), notice: "Comment was successfully updated."
     else
+      flash.now[:alert] = "Comment must not be empty."
       render :edit
     end
   end
 
   def destroy
     @comment.destroy
-    redirect_to projects_url, notice: "comment was successfully destroyed."
+    redirect_to project_task_path(@project, @task), notice: "Comment was successfully destroyed."
   end
 
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.find(params[:task_id])
   end
 
   def set_project
@@ -43,7 +49,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :task_id, :user_id)
+    params.require(:comment).permit(:id, :content, :task_id, :user_id)
   end
-
 end
