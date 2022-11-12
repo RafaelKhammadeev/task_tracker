@@ -29,8 +29,9 @@
     <li><%= link_to 'Home', projects_path %></li>
     <% if logged_in? %>
       <li><%= link_to 'Log out', sessions_path, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      <% user_name = check_for_null_str(current_user['first_name']) || check_for_null_str(current_user['last_name']) || current_user['email'] %>
       <li>
-        <strong><%= check_for_null_str(current_user['first_name']) || check_for_null_str(current_user['last_name']) || current_user['email'] %></strong>
+        <strong><%= link_to user_name, sessions_path %></strong>
       </li>
     <% else %>
       <li><%= link_to 'Sign in', new_user_path %></li>
