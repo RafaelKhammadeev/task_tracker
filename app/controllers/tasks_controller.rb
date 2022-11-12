@@ -36,7 +36,6 @@ class TasksController < ApplicationController
   end
 
   def update
-
     if @task.update(task_params)
       redirect_to project_task_url(@task.project, @task), notice: "Task was successfully updated."
     else
