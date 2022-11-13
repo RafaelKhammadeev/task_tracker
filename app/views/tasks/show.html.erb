@@ -43,7 +43,7 @@
   <% @task.comments.each do |comment| %>
     <tr>
       <td><%= comment.content %></td>
-      <td><%= User.find(comment.user_id)['email'] %></td>
+      <td><%= comment.user.email %></td>
       <td><%= link_to 'Edit', edit_project_task_comment_path(@project, @task, comment)%></td>
       <td><%= link_to 'Destroy', project_task_comment_path(@project, @task, comment) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
