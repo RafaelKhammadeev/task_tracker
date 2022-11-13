@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :projects, through: :project_memberships
   has_many :comments, dependent: :destroy
 
-
   enumerize :role, in: ROLES, scope: :shallow, predicates: true
 
   validates :email, presence: true, uniqueness: true
