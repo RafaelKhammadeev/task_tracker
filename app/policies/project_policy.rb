@@ -14,6 +14,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
+
     true
   end
 
