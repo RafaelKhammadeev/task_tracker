@@ -22,6 +22,7 @@
             | ago
           td = link_to 'Tasks', project_tasks_path(project), class: "btn btn-primary ms-1"
           td = link_to 'Edit', edit_project_path(project), class: "btn btn-success ms-1"
-          td = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger ms-1"
+          td = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' },
+                  class: "btn btn-danger ms-1"
 
   = paginate @projects
