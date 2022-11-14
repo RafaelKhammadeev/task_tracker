@@ -24,11 +24,14 @@ gem "pry", "~> 0.13.1"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem 'faker'
+  gem 'factory_bot_rails'
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
   gem "rubocop-thread_safety", require: false
+  gem 'rspec-rails', "~> 6.0.0"
 end
 
 group :development do
