@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
   extend Enumerize
 
-  STATUS = ['Not started', 'Started', 'Finished'].freeze
+  STATUS = ["Not started", "Started", "Finished"].freeze
 
   belongs_to :task
   belongs_to :user
