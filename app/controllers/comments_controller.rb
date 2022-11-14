@@ -14,9 +14,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully created."
     else
-      @comment.destroy
-      flash.now[:alert] = "Comment must not be empty."
-      render :"tasks/show"
+      flash.now[:alert] = "Something went wrong. Try again."
+      render "tasks/show"
     end
   end
 
@@ -24,7 +23,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully updated."
     else
-      flash.now[:alert] = "Comment must not be empty."
+      flash.now[:alert] = "Something went wrong. Try again."
       render :edit
     end
   end
