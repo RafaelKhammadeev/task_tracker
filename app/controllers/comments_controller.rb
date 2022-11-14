@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_task
   before_action :set_project
   before_action :set_comment, only: %i[edit update destroy]
-  before_action -> { authorize! @comment, with: CommentPolicy }
-  # коменты должны отображаться в task_show
+  before_action -> { authorize! Comment }
 
   def edit
   end

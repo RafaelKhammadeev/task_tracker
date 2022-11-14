@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.select :status, ['Not started', 'Started', 'Finished'] %>
+    <%= form.select :status, Comment.status.values %>
   </div>
 
   <div class="field">
