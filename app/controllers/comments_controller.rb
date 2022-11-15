@@ -39,14 +39,14 @@ class CommentsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = @task.project
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = @task.comments
   end
 
   def comment_params
-    params.require(:comment).permit(:id, :content, :task_id, :user_id)
+    params.require(:comment).permit(:content, :task_id)
   end
 end
