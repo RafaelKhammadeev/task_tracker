@@ -26,6 +26,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && record.project_memberships.find_by(user: user).role == "owner"
+    record.project_memberships.find_by(user: user).role.owner?
   end
 end
