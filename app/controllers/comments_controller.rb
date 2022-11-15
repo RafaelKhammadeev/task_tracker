@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.new(content: comment_params[:content], user: current_user, task: @task)
 
     if @comment.save
       redirect_to project_task_path(@project, @task), notice: "Comment was successfully created."
@@ -39,14 +39,14 @@ class CommentsController < ApplicationController
   end
 
   def set_project
-    @project = @task.project
+    @project = Project.find(params[:project_id])
   end
 
   def set_comment
-    @comment = @task.comments
+    @comment = Comment.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :task_id)
+    params.require(:comment).permit(:content)
   end
 end

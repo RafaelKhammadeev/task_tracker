@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_project
-  before_action -> { authorize! @project, with: TaskPolicy }
+  before_action -> { authorize! @task }, only: %i[show edit update destroy]
+  before_action -> { authorize! Task.new(project: @project)}, only: %i[index new create]
 
   def index
     @tasks = @project.tasks

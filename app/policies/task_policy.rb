@@ -1,31 +1,35 @@
 class TaskPolicy < ApplicationPolicy
-  authorize :user, allow_nil: true
-
   def index?
-    show?
+    member?
   end
 
   def show?
-    record.project_memberships.find_by(user: user).present?
+    member?
   end
 
   def new?
-    show?
+    create?
   end
 
   def create?
-    show?
+    member?
   end
 
   def edit?
-    show?
+    update?
   end
 
   def update?
-    show?
+    member?
   end
 
   def destroy?
-    show?
+    member?
+  end
+
+  private
+
+  def member?
+    record.project.project_memberships.find_by(user: user).present?
   end
 end

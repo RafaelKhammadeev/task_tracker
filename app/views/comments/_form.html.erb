@@ -6,12 +6,7 @@
 
   <div class="field">
     <%= form.label :task_id %>
-    <%= form.select :task_id, Task.all.pluck(:title, :id) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.select :user_id, User.all.pluck(:email, :id) %>
+    <%= form.select :task_id, project.tasks.pluck(:title, :id) %>
   </div>
 
   <div class="field">
