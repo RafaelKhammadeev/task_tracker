@@ -1,4 +1,4 @@
-<%= form_with(model: comment, url: [project, task, comment]) do |form| %>
+<%= form_with(model: [project, task, comment]) do |form| %>
   <div class="field">
     <strong><%= form.label :content, "Content of Comment" %></strong>
     <%= form.text_area :content %>
