@@ -1,12 +1,11 @@
 class ProjectMailer < ApplicationMailer
   def project_created(project, user)
     @project = project
-    binding.pry
 
     mail(to: user.email)
   end
 
-  def project_destroyed(project)
+  def project_destroyed(project, user)
     @project = project
     binding.pry
     mail(to: user.email)
