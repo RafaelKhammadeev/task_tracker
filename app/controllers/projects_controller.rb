@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
     if destroy_project.success?
       redirect_to projects_path, notice: "Project was successfully destroyed."
     else
+      redirect_to projects_path, notice: "Something went wrong. Try again."
     end
   end
 
@@ -67,7 +68,7 @@ class ProjectsController < ApplicationController
 
   def destroy_project
     @destroy_project ||=
-      Projects::Destroy.call(project: @project)
+      Projects::Destroy.call(project: @project, user: current_user)
   end
 
   # Use callbacks to share common setup or constraints between actions.
