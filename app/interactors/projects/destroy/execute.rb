@@ -6,7 +6,7 @@ module Projects
       delegate :project, to: :context
 
       def call
-        project.destroy
+        context.fail!(error: "Invalid data") unless project.destroy
       end
     end
   end

@@ -3,10 +3,10 @@ module Projects
     class SendNotification
       include Interactor
 
-      delegate :project,:user, to: :context
+      delegate :project, to: :context
 
       def call
-        ProjectMailer.project_destroyed(project, user).deliver_later
+        ProjectMailer.project_destroyed(project).deliver_later
       end
     end
   end
