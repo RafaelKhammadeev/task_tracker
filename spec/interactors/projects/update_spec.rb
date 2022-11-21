@@ -1,17 +1,17 @@
 require "rails_helper"
 
-describe Projects::Create do
+describe Projects::Update do
   describe ".organized" do
     let(:expected_interactors) do
       [
-        Projects::Save,
-        Projects::Create::CreateOwner,
-        Projects::Create::SendNotification
+        Projects::Update::Execute,
+        Projects::Update::SendNotification
       ]
     end
 
-    it "organizes create interactors correctly" do
+    it "organizes update interactors correctly" do
       expect(described_class.organized).to eq(expected_interactors)
     end
+
   end
 end
