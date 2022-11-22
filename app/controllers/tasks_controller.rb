@@ -10,6 +10,7 @@ class TasksController < ApplicationController
   end
 
   def new
+    @task = Task.new
   end
 
   def create
@@ -32,6 +33,12 @@ class TasksController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @task.comments
+    respond_to do |format|
+      format.html { render :show}
+      format.json do
+        render json: {task: @task, comments: @comments}
+      end
+    end
   end
 
   def edit

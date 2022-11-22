@@ -28,6 +28,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    respond_to do |format|
+      format.html { render :edit }
+      format.json do
+        render json: { project: @project }
+      end
+    end
   end
 
   # POST /projects
