@@ -7,7 +7,7 @@ describe Projects::Update::Execute do
     context "when params are valid" do
       let(:project) { create :project }
       let(:params) do
-        { name: "MyTestNameForUpdate" g}
+        { name: "MyTestNameForUpdate" }
       end
 
       it "it's work" do
