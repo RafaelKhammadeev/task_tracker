@@ -1,4 +1,4 @@
-module Tasks
+module Comments
   class Destroy
     include Interactor::Organizer
 

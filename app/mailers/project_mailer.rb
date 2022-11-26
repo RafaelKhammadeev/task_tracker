@@ -5,10 +5,11 @@ class ProjectMailer < ApplicationMailer
     mail(to: user.email)
   end
 
-  def project_destroyed(project_name, user)
+  def project_destroyed(project_name, project_user_email)
+
     @project_name = project_name
 
-    mail(to: user.email)
+    mail(to: project_user_email)
   end
 
   def project_updated(project)

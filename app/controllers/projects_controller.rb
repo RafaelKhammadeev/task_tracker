@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
 
   def destroy_project
     @destroy_project ||=
-      Projects::Destroy.call(project: @project, user: current_user)
+      Projects::Destroy.call(project: @project, project_user_email: @project.users.pluck(:email))
   end
 
   # Use callbacks to share common setup or constraints between actions.
