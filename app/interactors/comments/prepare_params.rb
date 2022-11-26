@@ -9,7 +9,6 @@ module Comments
     end
 
     def comment
-
       @comment ||= Comment.new(comment_params.merge({ task: task, user: user }))
     end
   end

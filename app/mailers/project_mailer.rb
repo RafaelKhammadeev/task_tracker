@@ -6,7 +6,6 @@ class ProjectMailer < ApplicationMailer
   end
 
   def project_destroyed(project_name, project_user_email)
-
     @project_name = project_name
 
     mail(to: project_user_email)
