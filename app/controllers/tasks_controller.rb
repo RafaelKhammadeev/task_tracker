@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   private
 
   def create_task
-    @create_task ||= Tasks::Create.call(task_params: task_params, project: @project)
+    @create_task ||= Tasks::Create.call(task_params: task_params, project: @project, user: current_user)
   end
 
   def update_task
@@ -65,7 +65,7 @@ class TasksController < ApplicationController
   end
 
   def destroy_task
-    @destroy_task ||= Tasks::Destroy.call(task: @task)
+    @destroy_task ||= Tasks::Destroy.call(task: @task, user: current_user, project: @project)
   end
 
   def set_task
