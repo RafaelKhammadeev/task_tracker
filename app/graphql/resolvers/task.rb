@@ -4,9 +4,8 @@ module Resolvers
 
     type Types::TaskType, null: true
 
-
-    def resolve(**_options)
-      ::Task.find_by(id: _options[:id])
+    def resolve(**options)
+      ::Task.find_by(id: options[:id])
     end
   end
 end
