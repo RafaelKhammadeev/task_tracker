@@ -1,6 +1,6 @@
 module Resolvers
-  class Tasks < Resolvers::Base
-    argument :id, ID, require: true
+  class Task < Resolvers::Base
+    argument :id, ID, required: true
 
     type Types::TaskType, null: true
 
