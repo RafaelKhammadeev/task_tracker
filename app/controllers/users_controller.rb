@@ -17,10 +17,6 @@ class UsersController < ApplicationController
 
   private
 
-  def update_user
-    @update_user ||= Users::Update.call(user_params: user_params, user: current_user)
-  end
-
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)
   end
