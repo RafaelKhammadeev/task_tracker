@@ -6,10 +6,8 @@ module Mutations
 
     type Types::Payloads::UpdateUserPayload
 
-
     def resolve(input:)
       result = Users::Update.call(user_params: input.to_h, user: current_user)
-
 
       if result.success?
         result.to_h

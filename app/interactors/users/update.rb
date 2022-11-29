@@ -5,4 +5,3 @@ module Users
     organize Users::Update::Execute
   end
 end
-

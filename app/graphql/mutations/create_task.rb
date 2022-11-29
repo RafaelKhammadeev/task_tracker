@@ -6,11 +6,9 @@ module Mutations
 
     type Types::Payloads::CreateTaskPayload
 
-
     def resolve(input:)
       project = Project.find(input.project_id)
       result = Tasks::Create.call(task_params: input.to_h, project: project)
-
 
       if result.success?
         result.to_h
