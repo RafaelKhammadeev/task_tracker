@@ -41,11 +41,10 @@ class ProjectsController < ApplicationController
     @project = create_project.project
 
     respond_to do |format|
-      if create_project.success?
-        format.html { redirect_to @project, notice: "Project was successfully created." }
-
-      else
-        format.html do
+      format.html do
+        if create_project.success?
+          redirect_to @project, notice: "Project was successfully created."
+        else
           flash.now[:alert] = "Something went wrong. Try again."
           render :new
         end
