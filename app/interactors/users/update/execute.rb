@@ -6,7 +6,7 @@ module Users
       delegate :user_params, :user, to: :context
 
       def call
-        context.fail!(error: "Invalid Data") if !user&.update(user_params) && !context.fail!(error: "Invalid Data")
+        context.fail!(error: "Invalid Data") unless user&.update(user_params)
       end
     end
   end
