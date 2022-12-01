@@ -12,7 +12,7 @@ module Mutations
       if result.success?
         result.to_h
       else
-        result.to_h.merge(errors: formatted_errors(result.task))
+        result.to_h.merge(errors: formatted_errors(result.user))
       end
     end
   end
