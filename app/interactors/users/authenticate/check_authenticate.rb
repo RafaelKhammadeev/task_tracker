@@ -1,6 +1,6 @@
 module Users
   class Authenticate
-    class Execute
+    class CheckAuthenticate
       include Interactor
 
       delegate :credentials, to: :context
