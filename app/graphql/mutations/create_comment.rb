@@ -1,5 +1,6 @@
 module Mutations
   class CreateComment < BaseMutation
+    include AuthenticableGraphqlUser
     include GraphqlErrors
 
     argument :input, Types::Inputs::CreateCommentInput, required: true
