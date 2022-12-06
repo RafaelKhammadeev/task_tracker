@@ -1,5 +1,6 @@
 module Mutations
   class UpdateUser < BaseMutation
+    include AuthenticableGraphqlUser
     include GraphqlErrors
 
     argument :input, Types::Inputs::UpdateUserInput
@@ -7,7 +8,7 @@ module Mutations
     type Types::Payloads::UpdateUserPayload
 
     def resolve(input:)
-      result = Users::Update.call(user_params: input.to_h, user: current_user)
+      result = Users::Save.call(user_params: input.to_h)
 
       if result.success?
         result.to_h
