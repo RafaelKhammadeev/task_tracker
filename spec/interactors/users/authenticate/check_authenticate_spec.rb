@@ -8,7 +8,6 @@ describe Users::Authenticate::CheckAuthenticate do
     context "when params are valid" do
       let(:credentials) { { email: "admin@admin.ru", password: "123456" } }
 
-
       it "successfully work" do
         interactor.run
 
