@@ -3,10 +3,11 @@ require "rails_helper"
 describe Users::Authenticate::CheckAuthenticate do
   describe ".call" do
     let(:interactor) { described_class.new(credentials: credentials) }
+    let!(:user) { create :user }
 
     context "when params are valid" do
       let(:credentials) { { email: "admin@admin.ru", password: "123456" } }
-      let!(:user) { create :user }
+
 
       it "successfully work" do
         interactor.run
@@ -17,8 +18,6 @@ describe Users::Authenticate::CheckAuthenticate do
 
     context "when params are invalid" do
       let(:credentials) { { email: "admin@admin.ru", password: "12345678" } }
-      let!(:user) { create :user }
-
       let(:expected_error_message) { [{ message: "Wrong credentials" }] }
 
       it "fails" do
