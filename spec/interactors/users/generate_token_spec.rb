@@ -7,8 +7,6 @@ describe Users::GenerateToken do
     context "when params are valid" do
       let(:user) { create :user }
 
-      it { expect { interactor.run }.to change(ProjectMembership, :count).by(1) }
-
       it "successfully work" do
         interactor.run
 

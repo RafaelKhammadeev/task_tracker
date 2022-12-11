@@ -11,7 +11,7 @@ describe Users::Authenticate::CheckAuthenticate do
       it "successfully work" do
         interactor.run
 
-        expect(interactor.context.user).to be user
+        expect(interactor.context.user.id).to be user.id
       end
     end
 
