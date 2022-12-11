@@ -5,13 +5,14 @@ describe Users::GenerateToken do
     let(:interactor) { described_class.new(user: user) }
 
     context "when params are valid" do
-      let!(:user) { create :user }
+      let(:user) { create :user }
+
+      it { expect { interactor.run }.to change(ProjectMembership, :count).by(1) }
 
       it "successfully work" do
-        access_token = JWT.encode({ sub: user.id }, ENV.fetch("JWT_SECRET"), "HS256")
         interactor.run
 
-        expect(interactor.context.access_token).to be == access_token
+        expect(interactor.context.access_token).to be_present
       end
     end
   end

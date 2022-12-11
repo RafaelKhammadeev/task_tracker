@@ -15,7 +15,7 @@ describe Users::Authenticate::CheckAuthenticate do
       end
     end
 
-    context "when params are invalid" do
+    context "when password is invalid" do
       let(:credentials) { { email: "admin@admin.ru", password: "12345678" } }
       let(:expected_error_message) { [{ message: "Wrong credentials" }] }
 

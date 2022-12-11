@@ -5,10 +5,15 @@ module Users
     delegate :user, to: :context
 
     def call
+      context.fail!(errors: errors) if user.nil?
       context.access_token = access_token
     end
 
     private
+
+    def errors
+      [{ message: "Invalid Data" }]
+    end
 
     def access_token
       JWT.encode(payload, jwt_secret, "HS256")
