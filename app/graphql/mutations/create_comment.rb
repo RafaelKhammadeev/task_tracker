@@ -11,11 +11,7 @@ module Mutations
       task = Task.find(input.task_id)
       result = Comments::Create.call(comment_params: input.to_h, user: current_user, task: task)
 
-      if result.success?
-        result.to_h
-      else
-        result.to_h.merge(errors: formatted_errors(result.comment))
-      end
+      result.to_h.merge(errors: formatted_errors(result.comment))
     end
   end
 end
