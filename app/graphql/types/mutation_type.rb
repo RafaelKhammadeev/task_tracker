@@ -4,7 +4,8 @@ module Types
     field :sign_in, mutation: Mutations::SignIn
 
     field :create_project, mutation: Mutations::CreateProject
-    field :create_comment, mutation: Mutations::CreateComment
     field :update_project, mutation: Mutations::UpdateProject
+    
+    field :create_comment, mutation: Mutations::CreateComment
   end
 end
