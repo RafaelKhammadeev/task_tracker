@@ -8,13 +8,9 @@ module Mutations
     type Types::Payloads::UpdateUserPayload
 
     def resolve(input:)
-      result = Users::Save.call(user_params: input.to_h)
+      result = Users::Update.call(user_params: input.to_h, user: current_user)
 
-      if result.success?
-        result.to_h
-      else
-        result.to_h.merge(errors: formatted_errors(result.user))
-      end
+      result.to_h.merge(errors: formatted_errors(result.user))
     end
   end
 end

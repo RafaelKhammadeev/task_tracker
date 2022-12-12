@@ -1,7 +1,6 @@
 module Mutations
   class CreateTask < BaseMutation
     include AuthenticableGraphqlUser
-    include GraphqlErrors
 
     argument :input, Types::Inputs::CreateTaskInput
 
