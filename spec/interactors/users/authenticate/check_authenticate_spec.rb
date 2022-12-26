@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# rubocop: disable Metrics/BlockLength
 describe Users::Authenticate::CheckAuthenticate do
   describe ".call" do
     let(:interactor) { described_class.new(credentials: credentials) }
@@ -10,7 +11,6 @@ describe Users::Authenticate::CheckAuthenticate do
 
       it "successfully work" do
         interactor.run
-
         expect(interactor.context.user.id).to be user.id
       end
     end
@@ -21,7 +21,6 @@ describe Users::Authenticate::CheckAuthenticate do
 
       it "fails" do
         interactor.run
-
         expect(interactor.context.errors).to eq(expected_error_message)
       end
     end
@@ -32,9 +31,9 @@ describe Users::Authenticate::CheckAuthenticate do
 
       it "fails" do
         interactor.run
-
         expect(interactor.context.errors).to eq(expected_error_message)
       end
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
