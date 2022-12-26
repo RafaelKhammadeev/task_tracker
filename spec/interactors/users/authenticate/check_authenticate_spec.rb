@@ -25,5 +25,16 @@ describe Users::Authenticate::CheckAuthenticate do
         expect(interactor.context.errors).to eq(expected_error_message)
       end
     end
+
+    context "when email is invalid" do
+      let(:credentials) { { email: "admin@admin", password: "123456" } }
+      let(:expected_error_message) { [{ message: "Wrong credentials" }] }
+
+      it "fails" do
+        interactor.run
+
+        expect(interactor.context.errors).to eq(expected_error_message)
+      end
+    end
   end
 end

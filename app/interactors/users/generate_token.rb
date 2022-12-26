@@ -12,7 +12,7 @@ module Users
     private
 
     def errors
-      [{ message: "Invalid Data" }]
+      [{ message: "Programmer's mistakes" }]
     end
 
     def access_token
