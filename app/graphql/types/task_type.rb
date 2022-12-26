@@ -1,6 +1,6 @@
 module Types
   class TaskType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, ID, null: true
     field :title, String
     field :description, String
     field :deadline_at, GraphQL::Types::ISO8601DateTime
