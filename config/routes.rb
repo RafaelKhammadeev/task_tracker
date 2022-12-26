@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
   root to: "projects#index"
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :projects, only: %i[index create]
+    end
+  end
 
   resources :projects do
     resources :tasks do

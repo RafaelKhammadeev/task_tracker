@@ -9,6 +9,12 @@ class ProjectsController < ApplicationController
                        .order(params[:sort])
                        .page(params[:page])
                        .per(5)
+    respond_to do |format|
+      format.html { render :index }
+      format.json do
+        render json: { projects: @projects }
+      end
+    end
   end
 
   # GET /projects/1
@@ -22,23 +28,37 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    respond_to do |format|
+      format.html { render :edit }
+      format.json do
+        render json: { project: @project }
+      end
+    end
   end
 
   # POST /projects
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @project = create_project.project
-
-    if create_project.success?
-      redirect_to @project, notice: "Project was successfully created."
-    else
-      flash.now[:alert] = "Something went wrong. Try again."
-      render :new
+    respond_to do |format|
+      if create_project.success?
+        format.html { redirect_to @project, notice: "Project was successfully created." }
+        format.json do
+          render json: { project: @project, errors: @project.errors }
+        end
+      else
+        format.html { render :new, notice: "Something went wrong. Try again" }
+        format.json do
+          render json: { project: {}, errors: @project.errors }
+        end
+      end
     end
   end
 
   # PATCH/PUT /projects/1
   def update
-    if @project.update(project_params)
+    @project = update_project.project
+
+    if update_project.success?
       redirect_to @project, notice: "Project was successfully updated."
     else
       render :edit
@@ -47,8 +67,11 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
-    @project.destroy
-    redirect_to projects_path, notice: "Project was successfully destroyed."
+    if destroy_project.success?
+      redirect_to projects_path, notice: "Project was successfully destroyed."
+    else
+      redirect_to projects_path, notice: "Failed to destroy project"
+    end
   end
 
   private
@@ -56,6 +79,16 @@ class ProjectsController < ApplicationController
   def create_project
     @create_project ||=
       Projects::Create.call(project_params: project_params, user: current_user)
+  end
+
+  def update_project
+    @update_project ||=
+      Projects::Update.call(project_params: project_params, project: @project)
+  end
+
+  def destroy_project
+    @destroy_project ||=
+      Projects::Destroy.call(project: @project)
   end
 
   # Use callbacks to share common setup or constraints between actions.
