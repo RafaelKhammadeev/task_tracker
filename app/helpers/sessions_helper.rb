@@ -1,20 +1,14 @@
 module SessionsHelper
-  # Осуществляет вход данного пользователя.
-  def log_in(user)
-    session[:user_id] = user.id
-  end
-
-  # Возвращает текущего вошедшего пользователя (если есть).
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
-
   # Возвращает true, если пользователь вошел, иначе false.
   def logged_in?
-    !current_user.nil?
+    current_user.present?
   end
 
-  def check_for_null_str(text)
-    text == "" ? nil : text
+  def check_for_null(text)
+    text.blank? ? nil : text
+  end
+
+  def check_name_output
+    check_for_null(current_user['first_name']) || check_for_null(current_user['last_name']) || current_user['email']
   end
 end

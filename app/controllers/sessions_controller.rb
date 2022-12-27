@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
             &.authenticate(user_params[:password])
 
     if @user
-      log_in @user
+      session[:current_user_id] = @user.id
       redirect_to root_path, notice: "You've successfully logged in!"
     else
       @user = User.new
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
+    session.delete(:current_user_id)
     @current_user = nil
     redirect_to root_path
   end
