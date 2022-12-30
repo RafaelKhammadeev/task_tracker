@@ -27,7 +27,7 @@ module Api
         if update_project.success?
           render json: { project: @project, errors: @project.errors }
         else
-          render json: {  project: {}, errors: @project.errors }
+          render json: { project: {}, errors: @project.errors }
         end
       end
 
@@ -35,7 +35,7 @@ module Api
         if destroy_project.success?
           render json: { project: @project, errors: @project.errors }
         else
-          render json: {  project: {}, errors: @project.errors }
+          render json: { project: {}, errors: @project.errors }
         end
       end
 

@@ -2,13 +2,12 @@ module Api
   module V1
     class TasksController < Api::ApplicationController
       before_action :set_project
-      before_action :set_task, only: %i[show edit update destroy]
-
+      before_action :set_task, only: %i[update destroy]
 
       def index
         @tasks = @project.tasks
 
-        render json: { tasks: @tasks}
+        render json: { tasks: @tasks }
       end
 
       def create
